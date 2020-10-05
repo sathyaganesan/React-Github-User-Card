@@ -38,7 +38,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className = "main-div">
+        <h1>Github User finding App</h1>
         <UserCompo userAttr={this.state.gitusers} />
         <FollowerCompo followAttr={this.state.gitfollowers} />
       </div>
