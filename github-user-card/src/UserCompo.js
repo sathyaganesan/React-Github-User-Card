@@ -2,11 +2,16 @@ import React from 'react';
 
 const UserCompo = (props) => {
     return (
-        <div>
-            <h2> User Component </h2>
-            <h3>{props.userAttr.name}</h3>
-            <h3>{props.userAttr.login}</h3>
-            <h3>{props.userAttr.location}</h3>
+        <div className="user-div">
+            <div className = "user-cont-div">
+                <h4>Git User Name: {props.userAttr.name}</h4>
+               
+                <p>Github Login:  <a href = {props.userAttr.html_url}> {props.userAttr.html_url}</a></p>
+                <p>Location: {props.userAttr.location}</p>
+            </div>
+            <div>
+                <img src = {props.userAttr.avatar_url } alt = "Image"/>
+            </div>
         </div>
     );
 }
