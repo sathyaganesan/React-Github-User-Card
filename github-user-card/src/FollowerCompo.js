@@ -3,7 +3,7 @@ import React from 'react';
 const FollowerCompo = (props) => {
     return (
         <div>
-            <h2>Followers</h2>
+            <h2>My Github Followers</h2>
             {props.followAttr.map((item) => {
                 return (
                     <div className = "follower-div">

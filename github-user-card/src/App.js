@@ -9,7 +9,8 @@ class App extends React.Component {
     super();
     this.state = {
       gitfollowers: [],
-      gitusers: ""
+      gitusers: "",
+      myFollower: ""
     };
   }
 
@@ -35,12 +36,54 @@ class App extends React.Component {
             }); 
   }
 
+  changeHandler = (e) => {
+    this.setState({ ...this.state, myFollower: e.target.value });
+  };
+
+  formClick = () => { 
+    axios
+      .get(`https://api.github.com/users/sathyaganesan/followers`)
+      .then((res) => {
+        this.setState({ ...this.state, gitfollowers: res.data, myFollower: "" });
+        console.log(res.data[0].login);
+      })
+      .catch((err) => {
+        console.log(err);
+    })
+  };
+
 
   render() {
     return (
       <div className = "main-div">
         <h1>Github User finding App</h1>
         <UserCompo userAttr={this.state.gitusers} />
+        <div>
+          <input
+            type="text"
+            name="followerName"
+            placeholder = "Follower Name"
+            onChange= {this.changeHandler}
+            value = {this.state.myFollower}
+          />
+          <button onClick = {this.formClick}>Find</button>
+        </div>
+        <div>
+          {this.state.gitfollowers.map((item) => {
+            return (
+              <div className = "follower-div">
+                <div className = "user-cont-div">
+                    <h3>Login Name: {item.login}</h3> 
+                    <p>Github Link:<a href = {item.html_url}>{item.html_url}</a> </p> 
+                    <p>Type: {item.type}</p> 
+                </div>
+                <div>
+                    <img src={item.avatar_url}/>
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <FollowerCompo followAttr={this.state.gitfollowers} />
       </div>
     );
