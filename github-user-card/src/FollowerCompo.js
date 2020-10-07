@@ -3,7 +3,7 @@ import React from 'react';
 const FollowerCompo = (props) => {
     return (
         <div>
-            <h2>Followers</h2>
+            <h2>My Github Followers</h2>
             {props.followAttr.map((item) => {
                 return (
                     <div className = "follower-div">
@@ -13,7 +13,7 @@ const FollowerCompo = (props) => {
                             <p>Type: {item.type}</p> 
                         </div>
                         <div>
-                            <img src={item.avatar_url}/>
+                            <img src={item.avatar_url} alt = "Followers Image"/>
                         </div>
                     </div>
                 )
