@@ -13,7 +13,7 @@ const FollowerCompo = (props) => {
                             <p>Type: {item.type}</p> 
                         </div>
                         <div>
-                            <img src={item.avatar_url}/>
+                            <img src={item.avatar_url} alt = "Followers Image"/>
                         </div>
                     </div>
                 )

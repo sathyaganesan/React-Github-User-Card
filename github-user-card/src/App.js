@@ -37,15 +37,15 @@ class App extends React.Component {
   }
 
   changeHandler = (e) => {
-    this.setState({ ...this.state, myFollower: e.target.value });
+    this.setState({ ...this.state, gitusers: e.target.value });
   };
 
   formClick = () => { 
     axios
-      .get(`https://api.github.com/users/sathyaganesan/followers`)
+      .get(`https://api.github.com/users/${this.state.gitusers}`)
       .then((res) => {
         this.setState({ ...this.state, gitfollowers: res.data, myFollower: "" });
-        console.log(res.data[0].login);
+        console.log(res.data.login);
       })
       .catch((err) => {
         console.log(err);
@@ -57,18 +57,19 @@ class App extends React.Component {
     return (
       <div className = "main-div">
         <h1>Github User finding App</h1>
-        <UserCompo userAttr={this.state.gitusers} />
         <div>
           <input
             type="text"
             name="followerName"
             placeholder = "Follower Name"
             onChange= {this.changeHandler}
-            value = {this.state.myFollower}
+            value = {this.state.gitusers}
           />
           <button onClick = {this.formClick}>Find</button>
         </div>
-        <div>
+        <UserCompo userAttr={this.state.gitusers} />
+        
+        {/* <div>
           {this.state.gitfollowers.map((item) => {
             return (
               <div className = "follower-div">
@@ -83,7 +84,7 @@ class App extends React.Component {
               </div>
             );
           })}
-        </div>
+        </div> */}
         <FollowerCompo followAttr={this.state.gitfollowers} />
       </div>
     );
